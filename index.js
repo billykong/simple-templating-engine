@@ -1,13 +1,13 @@
 async function populate(template, handler, options={}) {
-  [template, keys] = parse(template);
-  let data = await fetch(keys, handler);
-  let populated = merge(template, data);
+  [template, keys] = parse(template, options);
+  let data = await fetch(keys, handler, options);
+  let populated = merge(template, data, options);
   return populated;
 }
 
-function parse(template) {
+function parse(template, options={}) {
   let keys = [];
-  let re = /"<%([^%>]+)?%>"/g;
+  let re = options.matcher || /"<%([^%>]+)?%>"/g;
   let match;
   while(match = re.exec(template)) {
     keys.push(match[1].trim())
@@ -15,11 +15,11 @@ function parse(template) {
   return [template, keys];
 };
 
-async function fetch(keys, handler) {
+async function fetch(keys, handler, options={}) {
   return await handler(keys);
 };
 
-function merge(template, data) {
+function merge(template, data, options={}) {
   console.log("\nPopulating...")
   Object.keys(data).forEach(key => {
     let re = /"<%([^%>]+)?%>"/g;
