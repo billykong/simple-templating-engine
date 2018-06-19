@@ -1,0 +1,27 @@
+{
+  "name": "simple-template-engine",
+  "version": "1.0.0",
+  "description": "Simple templating engine that takes arbitrary template files and populates with handler functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/billykong/simple-templating-engine.git"
+  },
+  "keywords": [
+    "template",
+    "engine",
+    "custom",
+    "template",
+    "javascript",
+    "template"
+  ],
+  "author": "Billy Kong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billykong/simple-templating-engine/issues"
+  },
+  "homepage": "https://github.com/billykong/simple-templating-engine#readme"
+}
