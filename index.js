@@ -10,7 +10,7 @@ function parse(template, options={}) {
   let re = options.matcher || /"<%([^%>]+)?%>"/g;
   let match;
   while(match = re.exec(template)) {
-    keys.push(match[1].trim())
+    keys.push(match[0]);
   }
   return [template, keys];
 };
@@ -20,17 +20,16 @@ async function fetch(keys, handler, options={}) {
 };
 
 function merge(template, data, options={}) {
+  console.log(data)
   console.log("\nPopulating...")
   Object.keys(data).forEach(key => {
-    let re = /"<%([^%>]+)?%>"/g;
+    let re = options.matcher || /"<%([^%>]+)?%>"/g;
     let match;
-    while(match = re.exec(template)) {
-      console.log(match[0] + ": " + JSON.stringify(data[key]))
-      template = template.replace(match[0], JSON.stringify(data[key]))
+    while(template.includes(key)) {
+      template = template.replace(key, JSON.stringify(data[key]))
     }
   });
   console.log("\nFinishing...");
-  console.log(template);
   return template;
 }
 
