@@ -1,6 +1,10 @@
-### Simple Template Engine
+[![Build Status](https://travis-ci.org/billykong/simple-templating-engine.svg?branch=master)](https://travis-ci.org/billykong/simple-templating-engine)
+[![Coverage Status](https://coveralls.io/repos/github/billykong/simple-templating-engine/badge.svg?branch=master)](https://coveralls.io/github/billykong/simple-templating-engine?branch=master)
 
-#### Usage
+
+# Simple Template Engine
+
+## Usage
 ```JavaScript
 var templeteEngine = require('./simple_templating_engine.js');
 var template = "Hello, <% change_me %>";
