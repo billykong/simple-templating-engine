@@ -1,6 +1,6 @@
 {
   "name": "simple-template-engine",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Simple templating engine that takes arbitrary template files and populates with handler functions",
   "main": "simple_templating_engine.js",
   "scripts": {
