@@ -4,7 +4,8 @@
   "description": "Simple templating engine that takes arbitrary template files and populates with handler functions",
   "main": "simple_templating_engine.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
   "homepage": "https://github.com/billykong/simple-templating-engine#readme",
   "devDependencies": {
     "coveralls": "^3.0.11",
-    "istanbul": "^0.4.5",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "^7.1.1"
   }
 }
