@@ -20,13 +20,19 @@ async function fetch(keys, handler, options={}) {
 };
 
 function merge(template, data, options={}) {
-  console.log(data)
+  // console.log(data)
   console.log("\nPopulating...")
   Object.keys(data).forEach(key => {
     let re = options.matcher || /"<%([^%>]+)?%>"/g;
     let match;
     while(template.includes(key)) {
-      template = template.replace(key, JSON.stringify(data[key]))
+      console.log(`- mapping ${key} to ${data[key]}`);
+      if (typeof data[key] === 'string') {
+        template = template.replace(key, data[key]);
+      } else {
+        template = template.replace(key, JSON.stringify(data[key]));
+      }
+      
     }
   });
   console.log("\nFinishing...");

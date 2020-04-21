@@ -2,9 +2,9 @@
   "name": "simple-template-engine",
   "version": "1.0.1",
   "description": "Simple templating engine that takes arbitrary template files and populates with handler functions",
-  "main": "index.js",
+  "main": "simple_templating_engine.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/billykong/simple-templating-engine/issues"
   },
-  "homepage": "https://github.com/billykong/simple-templating-engine#readme"
+  "homepage": "https://github.com/billykong/simple-templating-engine#readme",
+  "devDependencies": {
+    "mocha": "^7.1.1"
+  }
 }
