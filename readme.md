@@ -10,13 +10,11 @@
 ```JavaScript
 var templeteEngine = require('./simple_templating_engine.js');
 var template = "Hello, <% change_me %>";
-
-
 var handlerWorld = function(key) { return { '<% change_me %>': 'World' } };
+
 templeteEngine.populate(template, handlerWorld).then(populated => {
     console.log(populated); // "Hello, World"
 });
-
 
 var handlerAsyncWorld = function(key) { return { '<% change_me %>': 'Async World' } };
 (async function() {
@@ -29,7 +27,6 @@ var handlerAsyncWorld = function(key) { return { '<% change_me %>': 'Async World
 It also work with JSON template:
 ```JavaScript
 var templateJSON = `{ "root": <% change_me %> }`;
-
 var handlerJSON = function(key) { 
   return { 
     '<% change_me %>': { 
@@ -57,5 +54,16 @@ var handlerJSON = async function(key) {
 };
 templeteEngine.populate(templateJSON, handlerJSON).then(populated => {
     console.log(populated); 
+});
+```
+
+You can also use another matcher pattern other than `<% ... %>`:
+```JavaScript
+var template = "Hello, {_ change_me _}";
+var options = { matcher: /"{_([^%>]+)?_}"/g}
+var handler = function(key) { return { '{_ change_me _}': 'World' } };
+
+templeteEngine.populate(template, handler, options).then(populated => {
+    console.log(populated); // "Hello, World"
 });
 ```

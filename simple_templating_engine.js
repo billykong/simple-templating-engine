@@ -10,7 +10,7 @@ function parse(template, options={}) {
   let re = options.matcher || /"<%([^%>]+)?%>"/g;
   let match;
   while(match = re.exec(template)) {
-    keys.push(match[0]);
+    keys.push(match[0]); // this line is never executed
   }
   return [template, keys];
 };
@@ -23,8 +23,6 @@ function merge(template, data, options={}) {
   // console.log(data)
   console.log("\nPopulating...")
   Object.keys(data).forEach(key => {
-    let re = options.matcher || /"<%([^%>]+)?%>"/g;
-    let match;
     while(template.includes(key)) {
       if (typeof data[key] === 'string') {
         console.log(`- mapping ${key} to ${data[key]}`);
@@ -33,7 +31,6 @@ function merge(template, data, options={}) {
         console.log(`- mapping ${key} to ${JSON.stringify(data[key])}`);
         template = template.replace(key, JSON.stringify(data[key]));
       }
-      
     }
   });
   console.log("\nFinishing...");

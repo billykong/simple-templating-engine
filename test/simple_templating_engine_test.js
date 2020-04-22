@@ -55,8 +55,19 @@ describe('templateEngine#populate()', function() {
       let populated = await templeteEngine.populate(template, handler);
       assert(_.isEqual(JSON.parse(populated), { root: { key1: 'value1', key2: 'value2' }}));
     });
-
-
   });
 
+  context('with custom matcher regex in options', function() {
+    let template, options, handler;
+    beforeEach(function() {
+      template = "Hello, {_ change_me _}";
+      options = { matcher: /"{_([^%>]+)?_}"/g}
+      handler = function(key) { return { '{_ change_me _}': 'World' } }
+    });
+
+    it('should replace the placeholder with the async handler', async function() {
+      let populated = await templeteEngine.populate(template, handler, options);
+      assert.equal(populated, 'Hello, World');
+    });
+  });
 });
