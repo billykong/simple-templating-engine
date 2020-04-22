@@ -6,23 +6,56 @@
 # Simple Template Engine
 
 ## Usage
+
 ```JavaScript
 var templeteEngine = require('./simple_templating_engine.js');
 var template = "Hello, <% change_me %>";
 
 
-var handler = function(key) { return { '<% change_me %>': 'World' } };
-templeteEngine.populate(template, handler).then(populated => {
-    console.log(populated);
+var handlerWorld = function(key) { return { '<% change_me %>': 'World' } };
+templeteEngine.populate(template, handlerWorld).then(populated => {
+    console.log(populated); // "Hello, World"
 });
 
 
-handler = function(key) { return { '<% change_me %>': 'Async World' } };
-
+var handlerAsyncWorld = function(key) { return { '<% change_me %>': 'Async World' } };
 (async function() {
-  let populated = await templeteEngine.populate(template, handler);
-  console.log(populated);
+  let populated = await templeteEngine.populate(template, handlerAsyncWorld);
+  console.log(populated); // Hello, Async World
 })();
 
 ```
 
+It also work with JSON template:
+```JavaScript
+var templateJSON = `{ "root": <% change_me %> }`;
+
+var handlerJSON = function(key) { 
+  return { 
+    '<% change_me %>': { 
+      'key1': 'value1',
+      'key2': 'value2'
+    } 
+  } 
+};
+
+templeteEngine.populate(templateJSON, handlerJSON).then(populated => {
+    console.log(JSON.parse(populated)); 
+    // { "root": {"key1":"value1","key2":"value2"} }
+});
+```
+
+The handler can be an async function when we need to call remote APIs to get data:
+```JavaScript
+var handlerJSON = async function(key) { 
+  return await {
+    '<% change_me %>': { 
+      'key1': 'value1',
+      'key2': 'value2'
+    } 
+  } 
+};
+templeteEngine.populate(templateJSON, handlerJSON).then(populated => {
+    console.log(populated); 
+});
+```

@@ -26,10 +26,11 @@ function merge(template, data, options={}) {
     let re = options.matcher || /"<%([^%>]+)?%>"/g;
     let match;
     while(template.includes(key)) {
-      console.log(`- mapping ${key} to ${data[key]}`);
       if (typeof data[key] === 'string') {
+        console.log(`- mapping ${key} to ${data[key]}`);
         template = template.replace(key, data[key]);
       } else {
+        console.log(`- mapping ${key} to ${JSON.stringify(data[key])}`);
         template = template.replace(key, JSON.stringify(data[key]));
       }
       
